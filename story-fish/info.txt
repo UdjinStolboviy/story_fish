@@ -1,0 +1,9 @@
+npx create-next-app --ts
+
+npm run dev
+
+npx sb init --builder webpack5
+
+npm run storybook   
+
+npm install --save-dev eslint-plugin-prettier
