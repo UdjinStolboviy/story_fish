@@ -7,3 +7,5 @@ npx sb init --builder webpack5
 npm run storybook   
 
 npm install --save-dev eslint-plugin-prettier
+
+npm i @emotion/react @emotion/styled -S
