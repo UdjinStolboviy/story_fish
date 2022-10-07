@@ -9,3 +9,9 @@ npm run storybook
 npm install --save-dev eslint-plugin-prettier
 
 npm i @emotion/react @emotion/styled -S
+
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom
+
+npm install -D jest-environment-jsdom
+
+npm i @testing-library/user-event -D
