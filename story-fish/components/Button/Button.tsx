@@ -1,6 +1,7 @@
 import { MouseEvent } from "react";
 import styled from "@emotion/styled";
 import { css, SerializedStyles } from "@emotion/react";
+import { AppTheme } from "@/styles/themes";
 
 export type Color =
   | "primary"
@@ -78,7 +79,8 @@ export const Button = styled.button<Props>`
   border-radius: 1rem;
   transition: all 0.4s ease;
   ${({ color }) => getColor(color)};
-  box-shadow: 0.5vmin 0.5vmin 1vmin #c8d0e7, -0.5vmin -0.5vmin 1vmin #ffffff;
+  ${({ theme }) =>
+    `box-shadow: 0.5vmin 0.5vmin 1vmin ${"#504e55"}, -0.5vmin -0.5vmin 1vmin ${"#6c6a73"}`};
   &:hover {
     opacity: 0.8;
   }
