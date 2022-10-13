@@ -16,7 +16,7 @@ export type Color =
 export type Props = {
   children: string;
   color?: Color;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const getColor = (color?: Color): SerializedStyles => {

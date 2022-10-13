@@ -18,6 +18,11 @@ npm install -D jest-environment-jsdom
 
 npm i @testing-library/user-event -D
 
+npm i tsconfig-paths-webpack-plugin -D
 
+npm i -D @storybook/addon-interactions  @storybook/jest @storybook/testing-library
+
+
+npm test -- -u
 npm run build
 npm run build-storybook

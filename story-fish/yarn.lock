@@ -2449,6 +2449,13 @@
     "lodash" "^4.17.21"
     "regenerator-runtime" "^0.13.7"
 
+"@storybook/expect@storybook-jest":
+  "integrity" "sha512-cP99mhWN/JeCp7VSIiymvj5tmuMY050iFohvp8Zq+kewKsBSZ6/qpTJAGCCZk6pneTcp4S0Fm5BSqyxzbyJ3gw=="
+  "resolved" "https://registry.npmjs.org/@storybook/expect/-/expect-27.5.2-0.tgz"
+  "version" "27.5.2-0"
+  dependencies:
+    "@types/jest" ">=26.0.0"
+
 "@storybook/instrumenter@^6.4.0", "@storybook/instrumenter@6.5.12":
   "integrity" "sha512-VMl+Yg6ab79A1VqlhC69sBFI6ySw4Lganqdf9JJf6Y7uNRcZwsjfGpGfYiL4WGH1q72tGiq/25XKGIJV0jgi1Q=="
   "resolved" "https://registry.npmjs.org/@storybook/instrumenter/-/instrumenter-6.5.12.tgz"
@@ -2459,6 +2466,16 @@
     "@storybook/core-events" "6.5.12"
     "core-js" "^3.8.2"
     "global" "^4.4.0"
+
+"@storybook/jest@^0.0.10":
+  "integrity" "sha512-qeYLIplpcOUQXboJde5pRCjTvkGmF80jEszRUoNYCNcEPfC2sMK68Wq6Ct8EQj3CoEdJqsK54O2YYh+7D9S+ag=="
+  "resolved" "https://registry.npmjs.org/@storybook/jest/-/jest-0.0.10.tgz"
+  "version" "0.0.10"
+  dependencies:
+    "@storybook/expect" "storybook-jest"
+    "@storybook/instrumenter" "^6.4.0"
+    "@testing-library/jest-dom" "^5.16.2"
+    "jest-mock" "^27.3.0"
 
 "@storybook/manager-webpack4@6.5.12":
   "integrity" "sha512-LH3e6qfvq2znEdxe2kaWtmdDPTnvSkufzoC9iwOgNvo3YrTGrYNyUTDegvW293TOTVfUn7j6TBcsOxIgRnt28g=="
@@ -2786,7 +2803,7 @@
     "lz-string" "^1.4.4"
     "pretty-format" "^27.0.2"
 
-"@testing-library/jest-dom@^5.16.5":
+"@testing-library/jest-dom@^5.16.2", "@testing-library/jest-dom@^5.16.5":
   "integrity" "sha512-N5ixQ2qKpi5OLYfwQmUb/5mSV9LneAcaUfp32pn4yCnpb8r/Yz0pXFPck21dIicKmi+ta5WRAknkZCfA8refMA=="
   "resolved" "https://registry.npmjs.org/@testing-library/jest-dom/-/jest-dom-5.16.5.tgz"
   "version" "5.16.5"
@@ -2955,7 +2972,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@*":
+"@types/jest@*", "@types/jest@>=26.0.0":
   "integrity" "sha512-y+nlX0h87U0R+wsGn6EBuoRWYyv3KFtwRNP3QWp9+k2tJ2/bqcGS3UxD7jgT+tiwJWWq3UsyV4Y+T6rsMT4XMg=="
   "resolved" "https://registry.npmjs.org/@types/jest/-/jest-29.1.2.tgz"
   "version" "29.1.2"
@@ -5568,7 +5585,7 @@
     "memory-fs" "^0.5.0"
     "tapable" "^1.0.0"
 
-"enhanced-resolve@^5.10.0":
+"enhanced-resolve@^5.10.0", "enhanced-resolve@^5.7.0":
   "integrity" "sha512-T0yTFjdpldGY8PmuXXR0PyQ1ufZpEGiHVrp7zHKB7jdR4qlmZHhONVM5AQOAWXuF/w3dnHbEQVrNptJgt7F+cQ=="
   "resolved" "https://registry.npmjs.org/enhanced-resolve/-/enhanced-resolve-5.10.0.tgz"
   "version" "5.10.0"
@@ -7908,7 +7925,7 @@
     "slash" "^3.0.0"
     "stack-utils" "^2.0.3"
 
-"jest-mock@^27.0.6":
+"jest-mock@^27.0.6", "jest-mock@^27.3.0":
   "integrity" "sha512-K4jKbY1d4ENhbrG2zuPWaQBvDly+iZ2yAW+T1fATN78hc0sInwn7wZB8XtlNnvHug5RMwV897Xm4LqmPM4e2Og=="
   "resolved" "https://registry.npmjs.org/jest-mock/-/jest-mock-27.5.1.tgz"
   "version" "27.5.1"
@@ -11583,6 +11600,15 @@
   "resolved" "https://registry.npmjs.org/ts-pnp/-/ts-pnp-1.2.0.tgz"
   "version" "1.2.0"
 
+"tsconfig-paths-webpack-plugin@^4.0.0":
+  "integrity" "sha512-fw/7265mIWukrSHd0i+wSwx64kYUSAKPfxRDksjKIYTxSAp9W9/xcZVBF4Kl0eqQd5eBpAQ/oQrc5RyM/0c1GQ=="
+  "resolved" "https://registry.npmjs.org/tsconfig-paths-webpack-plugin/-/tsconfig-paths-webpack-plugin-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "chalk" "^4.1.0"
+    "enhanced-resolve" "^5.7.0"
+    "tsconfig-paths" "^4.0.0"
+
 "tsconfig-paths@^3.14.1":
   "integrity" "sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ=="
   "resolved" "https://registry.npmjs.org/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz"
@@ -11590,6 +11616,15 @@
   dependencies:
     "@types/json5" "^0.0.29"
     "json5" "^1.0.1"
+    "minimist" "^1.2.6"
+    "strip-bom" "^3.0.0"
+
+"tsconfig-paths@^4.0.0":
+  "integrity" "sha512-AHx4Euop/dXFC+Vx589alFba8QItjF+8hf8LtmuiCwHyI4rHXQtOOENaM8kvYf5fR0dRChy3wzWIZ9WbB7FWow=="
+  "resolved" "https://registry.npmjs.org/tsconfig-paths/-/tsconfig-paths-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "json5" "^2.2.1"
     "minimist" "^1.2.6"
     "strip-bom" "^3.0.0"
 
