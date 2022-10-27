@@ -46,3 +46,27 @@ npm run lint && npm test
 npm test -- -u  (коли падають тести треба обновити цією командою)
 npm run build
 npm run build-storybook
+
+
+admin.js
+module.exports = ({ env }) => ({
+  apiToken: {
+    salt: env("API_TOKEN_SALT", "my-salt"),
+  },
+  auth: {
+    secret: env("ADMIN_JWT_SECRET", "Pcqj65jg9uqQ7lznz3Gwrg=="),
+  },
+});
+
+
+
+This is typically due to some outdated cached packages
+
+Please delete the following files and folders:
+
+.cache
+build
+node_modules
+package-lock.json
+yarn.lock
+Then reinstall your node_modules with npm i or yarn install and rebuild the admin with NODE_ENV=production yarn build or NODE_ENV=production npm run build
