@@ -9,7 +9,7 @@ type CoursesResponce = Response<CourseType[]>;
 export const getStaticProps: GetStaticProps = async () => {
   const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
-  const responce = await fetch(`${api_url}/courses?populate=*`, {
+  const responce = await fetch(`${api_url}/courses`, {
     method: "GET",
   });
 

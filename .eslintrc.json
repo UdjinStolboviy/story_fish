@@ -3,5 +3,5 @@
   "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
   "rules": {
     "prettier/prettier": "error"
-  },
+  }
 }

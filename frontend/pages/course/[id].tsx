@@ -27,7 +27,7 @@ type CoursesResponce = Response<CourseType[]>;
 export const getStaticPaths: GetStaticPaths = async () => {
   const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
-  const res = await fetch(`${api_url}/courses?populate=*`, {
+  const res = await fetch(`${api_url}/courses`, {
     method: "GET",
   });
 
@@ -64,6 +64,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (error && (error?.status < 200 || error?.status >= 300)) {
     return {
       props: {
+        paths: [],
+        fallback: true,
         course: {},
         meta: {},
       },

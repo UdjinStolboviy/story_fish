@@ -1,3 +1,5 @@
+npm cache clean -f
+
 npx create-next-app --ts
 
 npm run dev
