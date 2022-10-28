@@ -19,3 +19,10 @@ jobs:
               fetch-depth: 0
         - name: Install npm deps
           run: npm i
+          
+        - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        # Chromatic GitHub Action options
+        with:
+          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
