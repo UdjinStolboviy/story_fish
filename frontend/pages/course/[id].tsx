@@ -24,69 +24,69 @@ const CustomLink = styled(StyledLink)`
 type CourseResponce = Response<CourseType>;
 type CoursesResponce = Response<CourseType[]>;
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
-//   const res = await fetch(`${api_url}/courses`, {
-//     method: "GET",
-//   });
+  const res = await fetch(`${api_url}/courses`, {
+    method: "GET",
+  });
 
-//   const response: CoursesResponce = await res.json();
+  const response: CoursesResponce = await res.json();
 
-//   const status = response?.error?.status;
+  const status = response?.error?.status;
 
-//   if (status && (status < 200 || status >= 300)) {
-//     return {
-//       paths: [],
-//       fallback: true,
-//     };
-//   }
+  if (status && (status < 200 || status >= 300)) {
+    return {
+      paths: [],
+      fallback: true,
+    };
+  }
 
-//   const paths = response.data.map(({ id }) => `/course/${id}`);
+  const paths = response.data.map(({ id }) => `/course/${id}`);
 
-//   return {
-//     paths,
-//     fallback: true,
-//   };
-// };
+  return {
+    paths,
+    fallback: true,
+  };
+};
 
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+export const getStaticProps: GetStaticProps = async (context) => {
+  const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
-//   const id = context?.params?.id;
+  const id = context?.params?.id;
 
-//   const res = await fetch(`${api_url}/courses/${id}?populate=*`, {
-//     method: "GET",
-//   });
+  const res = await fetch(`${api_url}/courses/${id}?populate=*`, {
+    method: "GET",
+  });
 
-//   const { error, data, meta }: CourseResponce = await res.json();
+  const { error, data, meta }: CourseResponce = await res.json();
 
-//   if (error && (error?.status < 200 || error?.status >= 300)) {
-//     return {
-//       props: {
-//         paths: [],
-//         fallback: true,
-//         course: {},
-//         meta: {},
-//       },
-//     };
-//   }
+  if (error && (error?.status < 200 || error?.status >= 300)) {
+    return {
+      props: {
+        paths: [],
+        fallback: true,
+        course: {},
+        meta: {},
+      },
+    };
+  }
 
-//   const md = new MarkdownIt();
+  const md = new MarkdownIt();
 
-//   return {
-//     props: {
-//       course: {
-//         ...data,
-//         attributes: {
-//           ...data.attributes,
-//           description: md.render(data.attributes.description),
-//         },
-//       },
-//       meta: meta,
-//     },
-//   };
-// };
+  return {
+    props: {
+      course: {
+        ...data,
+        attributes: {
+          ...data.attributes,
+          description: md.render(data.attributes.description),
+        },
+      },
+      meta: meta,
+    },
+  };
+};
 
 const strapi_url = process.env.NEXT_PUBLIC_STRAPI_URL;
 
@@ -94,7 +94,7 @@ const CoursePage: NextPage<{
   course: CourseType;
   meta: CourseResponce["meta"];
 }> = ({ course }) => {
-  if (false) {
+  if (course && course?.attributes) {
     const {
       attributes: {
         header,
