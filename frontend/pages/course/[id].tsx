@@ -64,8 +64,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   if (error && (error?.status < 200 || error?.status >= 300)) {
     return {
       props: {
-        paths: [],
-        fallback: true,
         course: {},
         meta: {},
       },
