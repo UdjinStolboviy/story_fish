@@ -144,4 +144,4 @@ const CoursePage: NextPage<{
   return null;
 };
 
-export default CoursePage;
+export default null;
