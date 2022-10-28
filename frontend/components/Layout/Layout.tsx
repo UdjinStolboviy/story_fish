@@ -100,9 +100,7 @@ export const Layout: FC = ({ children }) => {
           onChange={searchChange}
         />
         <Content>{children}</Content>
-        <Footer>
-          © {new Date().getFullYear()} NickOvchinnikov. All rights reserved.
-        </Footer>
+        <Footer>© {new Date().getFullYear()}. All rights reserved.</Footer>
       </Wrapper>
     </ThemeProvider>
   );
