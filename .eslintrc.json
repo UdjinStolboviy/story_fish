@@ -1,0 +1,7 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:storybook/recommended"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  },
+}
