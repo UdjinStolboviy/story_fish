@@ -1,0 +1,21 @@
+# Workflow
+ name: 'Chromatic'
+
+ on:
+   push:
+     branches: [master]
+   pull_request:
+      branches: [master]
+
+# List of jobs
+jobs:
+  chromatic-deployment:
+    # Operating System
+    runs-on: ubuntu-latest
+    # Job steps
+    steps:
+        - uses: actions/checkout@v2
+          with:
+              fetch-depth: 0
+        - name: Install npm deps
+          run: npm i
