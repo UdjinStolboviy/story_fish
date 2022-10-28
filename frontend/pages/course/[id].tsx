@@ -92,7 +92,7 @@ const CoursePage: NextPage<{
   course: CourseType;
   meta: CourseResponce["meta"];
 }> = ({ course }) => {
-  if (course && course?.attributes) {
+  if (false) {
     const {
       attributes: {
         header,
@@ -144,4 +144,4 @@ const CoursePage: NextPage<{
   return null;
 };
 
-export default null;
+export default CoursePage;
