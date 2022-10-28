@@ -94,7 +94,7 @@ const CoursePage: NextPage<{
   course: CourseType;
   meta: CourseResponce["meta"];
 }> = ({ course }) => {
-  if (course && course?.attributes) {
+  if (false) {
     const {
       attributes: {
         header,
