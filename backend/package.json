@@ -9,12 +9,20 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.1.9",
+    "@offset-dev/strapi-calendar": "^0.0.9",
+    "@strapi/plugin-i18n": "4.4.1",
+    "@strapi/plugin-seo": "^1.7.6",
     "@strapi/plugin-users-permissions": "4.1.9",
-    "@strapi/plugin-i18n": "4.1.9",
-    "better-sqlite3": "7.5.1"
+    "@strapi/strapi": "4.4.1",
+    "better-sqlite3": "7.4.6",
+    "strapi-google-auth": "^0.1.2",
+    "strapi-plugin-comments": "^2.2.0",
+    "strapi-plugin-cookie-manager": "^1.0.8",
+    "strapi-plugin-custom-links": "^0.2.1",
+    "strapi-plugin-entity-relationship-chart": "^4.1.0",
+    "strapi-plugin-fcm": "^1.0.4",
+    "strapi-plugin-react-editorjs": "^2.0.2"
   },
   "author": {
     "name": "A Strapi developer"
