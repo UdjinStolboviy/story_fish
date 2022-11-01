@@ -1,0 +1,19 @@
+{{- range $service := .Values.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $.Values.application.name }}-{{ $service.name }}
+  labels:
+    app: {{ $.Values.application.name }}-{{ $service.name }}
+spec:
+  {{- if eq $service.name "mysql" }}
+  clusterIP: None
+  {{- else }}
+  ports:
+    - port: {{ $service.port }}
+      targetPort: {{ $service.port }}
+  {{- end }}
+  selector:
+    app: {{ $.Values.application.name }}-{{ $service.name }}
+{{- end }}

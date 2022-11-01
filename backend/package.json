@@ -14,6 +14,7 @@
     "@strapi/plugin-i18n": "4.4.1",
     "@strapi/plugin-seo": "^1.7.6",
     "@strapi/plugin-users-permissions": "4.1.9",
+    "@strapi/provider-upload-local": "^4.4.5",
     "@strapi/strapi": "4.4.1",
     "@vscode/sqlite3": "^5.0.8",
     "better-sqlite3": "7.4.6",
@@ -22,8 +23,7 @@
     "strapi-plugin-cookie-manager": "^1.0.8",
     "strapi-plugin-custom-links": "^0.2.1",
     "strapi-plugin-entity-relationship-chart": "^4.1.0",
-    "strapi-plugin-fcm": "^1.0.4",
-    "strapi-plugin-react-editorjs": "^2.0.2"
+    "strapi-plugin-fcm": "^1.0.4"
   },
   "author": {
     "name": "A Strapi developer"

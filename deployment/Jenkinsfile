@@ -1,0 +1,26 @@
+pipeline {
+    agent {
+        label "helm"
+    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: "10"))
+        timeout(time: 30, unit: "MINUTES")
+        ansiColor("xterm")
+        timestamps()
+    }
+    stages {
+        stage("k8s deploy") {
+            steps {
+                script {
+                    withFolderProperties {
+                        withKubeConfig([credentialsId: env.K8S_CRED_ID, namespace: env.K8S_NAMESPACE, serverUrl: env.K8S_API_URL]) {
+                            dir("deployment/helm") {
+                                sh "helm upgrade --install --namespace ${env.K8S_NAMESPACE} digicode-careers-${env.ENV_NAME} . --values ./${env.ENV_NAME}.yaml"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

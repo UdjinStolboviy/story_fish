@@ -1,0 +1,45 @@
+def buildNumber = env.BUILD_NUMBER as int
+if (buildNumber > 1) milestone(buildNumber - 1)
+milestone(buildNumber)
+
+def getGitBranchName() {
+  final name = scm.branches[0].name
+  final index = name.lastIndexOf('/')
+
+  if (index < 0) {
+    return name
+  }
+
+  final afterLastSlash = name.substring(index + 1, name.length())
+  return afterLastSlash
+}
+
+def branchName = getGitBranchName()
+def imageName = "registry.ffff/gggg/:${branchName}"
+
+pipeline {
+    agent {
+        label "docker"
+    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: "10"))
+        timeout(time: 30, unit: "MINUTES")
+        ansiColor("xterm")
+        timestamps()
+    }
+    stages {
+        stage("Build docker image") {
+            steps {
+                script {
+                    dir('ui') {
+                        docker.withRegistry('https://xxxx.net', 'harbor_admin') {
+                            docker
+                                .build(imageName)
+                                .push()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

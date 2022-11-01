@@ -1,0 +1,105 @@
+{{- range $deployment := $.Values.deployments }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Values.application.name }}-{{ $deployment.name }}
+  labels:
+    app: {{ $.Values.application.name }}-{{ $deployment.name }}
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: {{ $.Values.application.name }}-{{ $deployment.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $.Values.application.name }}-{{ $deployment.name }}
+      annotations:
+        timestamp: {{ now | quote }}
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Always
+      containers:
+        {{- range $container := $deployment.containers }}
+        - name: {{ $container.name }}
+          image: {{ $container.image }}
+          imagePullPolicy: Always
+          {{- if $container.probes }}
+          readinessProbe:
+            httpGet:
+              path: {{ $container.probes.path }}
+              port: {{ $container.probes.port }}
+              scheme: HTTP
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: {{ $container.probes.path }}
+              port: {{ $container.probes.port }}
+              scheme: HTTP
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          {{- end }}
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - sleep
+                  - '10'
+          {{- if or $container.envs $container.envMap $container.secrets }}
+          env:
+            {{- range $envName := $container.envs }}
+            - name: {{ $envName }}
+              valueFrom:
+                configMapKeyRef:
+                  key: {{ $envName }}
+                  name: {{ $.Values.application.name }}
+                  optional: false
+            {{- end -}}
+            {{- range $envName, $envValue := $container.envsMap }}
+            - name: {{ $envValue }}
+              valueFrom:
+                configMapKeyRef:
+                  key: {{ $envName }}
+                  name: {{ $.Values.application.name }}
+                  optional: false
+            {{- end -}}
+            {{- range $envName := $container.secrets }}
+            - name: {{ $envName }}
+              valueFrom:
+                secretKeyRef:
+                  key: {{ $envName }}
+                  name: {{ $.Values.application.name }}
+                  optional: false
+            {{- end -}}
+          {{- end -}}
+          {{- if $container.volumeMounts }}
+          volumeMounts:
+            {{- range $volume := $container.volumeMounts }}
+            - mountPath: {{ $volume.mountPath }}
+              name: {{ $volume.name }}
+            {{- end -}}
+          {{- end -}}
+        {{- end }}
+      {{- if $deployment.volumes }}
+      volumes:
+        {{- range $volume := $deployment.volumes }}
+        - name: {{ $volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ $volume.claimName }}
+        {{- end -}}
+      {{- end -}}
+{{- end }}

@@ -27,7 +27,7 @@ type CoursesResponce = Response<CourseType[]>;
 export const getStaticPaths: GetStaticPaths = async () => {
   const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
-  const res = await fetch(`${api_url}/courses`, {
+  const res = await fetch(`${api_url}/courses?populate=*`, {
     method: "GET",
   });
 
@@ -92,7 +92,7 @@ const CoursePage: NextPage<{
   course: CourseType;
   meta: CourseResponce["meta"];
 }> = ({ course }) => {
-  if (false) {
+  if (course && course?.attributes) {
     const {
       attributes: {
         header,

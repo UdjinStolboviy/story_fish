@@ -1,0 +1,55 @@
+---
+application:
+  name: app-develop
+
+deployments:
+  - name: frontend
+    containers:
+      - name: frontend
+        image: registry.dssfsfsf/hfghh/:develop
+  - name: backends
+    containers:
+      - name: backends
+        image: registry.dssfsfsf/hfghh/:develop
+        envs:
+          - DATABASE_HOST
+          - DATABASE_PORT
+          - DATABASE_NAME
+        secrets:
+          - DATABASE_USERNAME
+          - DATABASE_PASSWORD
+          - INSTAGRAM_ACCESS_TOKEN
+        probes:
+          path: /
+          port: 1337
+        volumeMounts:
+          - mountPath: /src/app/public/uploads
+            name: uploads
+    volumes:
+      - name: uploads
+        claimName: app-develop-uploads
+
+services:
+  - name: frontend
+    port: 80
+  - name: backends
+    port: 1337
+
+ingresses:
+  - host: sfsfsfsfsfsfs.ua
+    backends:
+      - path: /
+        serviceName: frontend
+        servicePort: 80
+      - path: /api
+        serviceName: backends
+        servicePort: 1337
+      - path: /uploads
+        serviceName: backends
+        servicePort: 1337
+
+  - host: dsfsfsdfsdfsfsfsf.ua
+    backends:
+      - path: /
+        serviceName: backends
+        servicePort: 1337
