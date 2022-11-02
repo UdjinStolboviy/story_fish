@@ -10,7 +10,6 @@ describe("useId check", () => {
   it("Generate unique id per render", () => {
     const { result: res1 } = renderHook(useId);
     const { result: res2 } = renderHook(useId);
-
     expect(res1.current).not.toBe(res2.current);
   });
 });
