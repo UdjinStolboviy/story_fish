@@ -9,15 +9,14 @@ export interface IGetPost {
 }
 
 export interface IGetInstagramPosts {
-    data: IInstagramPostData[],
+    data: IInstagramPostData[];
     meta: object;
 }
 
 export interface IGetFeedbacks {
-    data: IFeedbackData[],
+    data: IFeedbackData[];
     meta: object;
 }
-
 
 export interface IQuery {
     pagination?: IPagination;
@@ -32,20 +31,20 @@ export interface IPagination {
 export interface IFeedbackData {
     id: number;
     attributes: {
-        authorName: string
-        authorLink: string,
-        authorImage: string,
+        authorName: string;
+        authorLink: string;
+        authorImage: string;
         authorPosition: string;
-        reviewId: string,
-        summary: string,
-        publishedAt: string
-    }
+        reviewId: string;
+        summary: string;
+        publishedAt: string;
+    };
 }
 
 export enum IInstagramMediaType {
-    IMAGE = 'IMAGE',
-    VIDEO = 'VIDEO',
-    CAROUSEL_ALBUM = 'CAROUSEL_ALBUM'
+    IMAGE = "IMAGE",
+    VIDEO = "VIDEO",
+    CAROUSEL_ALBUM = "CAROUSEL_ALBUM",
 }
 
 export interface IInstagramPostData {
@@ -58,8 +57,7 @@ export interface IInstagramPostData {
         post_id: string;
         thumbnail_url: string;
         updatedAt: string;
-    }
-
+    };
 }
 
 export interface IGetVacancies {
@@ -106,10 +104,10 @@ interface IAdminData {
             img: {
                 data: {
                     attributes: {
-                        url: string
-                    }
-                }
-            }
+                        url: string;
+                    };
+                };
+            };
         };
         id: number;
     };

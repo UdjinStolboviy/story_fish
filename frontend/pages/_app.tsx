@@ -1,7 +1,11 @@
 import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
+//import { Provider } from "react-redux";
 
-import { store } from "@/store";
+//import { store } from "@/store";
+
+import React from "react";
+import { Provider } from "mobx-react";
+import { fetchInitialStoreState, DataStore } from "../stores/DataStore";
 
 import { Layout } from "@/components/Layout";
 

@@ -13,6 +13,8 @@
     "chromatic": "npx chromatic --project-token=b19f5a8c9c61"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.20.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@ensdomains/ensjs": "^2.0.1",
@@ -21,6 +23,8 @@
     "@types/styled-components": "^5.1.17",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "fetch-instagram": "^1.0.0-alpha.3",
+    "mobx": "^6.6.2",
+    "mobx-react": "^7.5.3",
     "moment": "^2.29.3",
     "next": "12.1.6",
     "next-videos": "^1.4.0",
