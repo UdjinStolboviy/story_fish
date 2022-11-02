@@ -25,9 +25,9 @@ type CourseResponce = Response<CourseType>;
 type CoursesResponce = Response<CourseType[]>;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+  const api_url = process.env.URL;
 
-  const res = await fetch(`${api_url}/courses?populate=*`, {
+  const res = await fetch(`${api_url}/api/courses`, {
     method: "GET",
   });
 

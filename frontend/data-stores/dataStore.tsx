@@ -1,28 +1,20 @@
-import { observable } from "mobx";
-import { useStaticRendering } from "mobx-react";
+import "../../styles/globals.css";
+import "../../styles/page.css";
+import { RootStoreProvider } from "../providers/RootStoreProvider";
+import { NextPage } from "next";
 
-const isServer = typeof window === "undefined";
-// eslint-disable-next-line react-hooks/rules-of-hooks
-useStaticRendering(isServer);
-
-type SerializedStore = {
-  title: string;
-  content: string;
-};
-
-export class DataStore {
-  @observable title: string | undefined;
-
-  hydrate(serializedStore: SerializedStore) {
-    this.title = serializedStore.title != null ? serializedStore.title : "";
-  }
-
-  changeTitle(newTitle: string) {
-    this.title = newTitle;
-  }
+function MyApp({
+  Component,
+  pageProps,
+}: {
+  Component: NextPage;
+  pageProps: any;
+}) {
+  return (
+    <RootStoreProvider hydrationData={pageProps.hydrationData}>
+      <Component {...pageProps} />;
+    </RootStoreProvider>
+  );
 }
 
-export async function fetchInitialStoreState() {
-  // You can do anything to fetch initial store state
-  return {};
-}
+export default MyApp;

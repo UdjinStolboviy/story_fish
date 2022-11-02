@@ -1,52 +1,85 @@
-import type { NextPage, GetStaticProps } from "next";
+import { Page } from "@/components/Page";
+import type { NextPage, GetStaticProps, GetServerSideProps } from "next";
 import Head from "next/head";
 
-import { Course as CourseType, Response } from "@/types";
-import { Courses } from "@/components/Course";
+export default function Index() {
+  return (
+    <>
+      <Head>
+        <title>CoursesBox</title>
+        <meta name="description" content="IT courses for everyone" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Page title="Server render" />
+    </>
+  );
+}
 
-type CoursesResponce = Response<CourseType[]>;
+export const getServerSideProps: GetServerSideProps =
+  async function getServerSideProps(ctx) {
+    let start = 0;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+    if (ctx.query.start && typeof ctx.query.start === "string") {
+      start = Number(ctx.query.start);
+    }
 
-  const responce = await fetch(`${api_url}/courses?populate=*`, {
-    method: "GET",
-  });
-
-  const { data: courses, meta, error }: CoursesResponce = await responce.json();
-
-  const status = error?.status;
-
-  if (status && (status < 200 || status >= 300)) {
     return {
       props: {
-        courses: [],
-        meta: {},
+        hydrationData: {
+          stopwatchStore: {
+            start,
+          },
+        },
       },
     };
-  }
-
-  return {
-    props: {
-      courses,
-      meta,
-    },
   };
-};
 
-const strapi_url = process.env.NEXT_PUBLIC_STRAPI_URL;
+// import { Course as CourseType, Response } from "@/types";
+// import { Courses } from "@/components/Course";
 
-const Home: NextPage<{
-  courses: CourseType[];
-}> = ({ courses }) => (
-  <>
-    <Head>
-      <title>CoursesBox</title>
-      <meta name="description" content="IT courses for everyone" />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-    <Courses courses={courses} strapi_url={String(strapi_url)} />
-  </>
-);
+// type CoursesResponce = Response<CourseType[]>;
 
-export default Home;
+// export const getStaticProps: GetStaticProps = async () => {
+//   const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+
+//   const responce = await fetch(`${api_url}/courses?populate=*`, {
+//     method: "GET",
+//   });
+
+//   const { data: courses, meta, error }: CoursesResponce = await responce.json();
+
+//   const status = error?.status;
+
+//   if (status && (status < 200 || status >= 300)) {
+//     return {
+//       props: {
+//         courses: [],
+//         meta: {},
+//       },
+//     };
+//   }
+
+//   return {
+//     props: {
+//       courses,
+//       meta,
+//     },
+//   };
+// };
+
+// const strapi_url = process.env.NEXT_PUBLIC_STRAPI_URL;
+
+// const Home: NextPage<{
+//   courses: CourseType[];
+// }> = ({ courses }) => (
+//   <>
+//     <Head>
+//       <title>CoursesBox</title>
+//       <meta name="description" content="IT courses for everyone" />
+//       <link rel="icon" href="/favicon.ico" />
+//     </Head>
+//     <Courses courses={courses} strapi_url={String(strapi_url)} />
+//   </>
+// );
+
+// export default Home;

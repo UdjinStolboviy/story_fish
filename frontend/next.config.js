@@ -12,7 +12,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "local/api/:path*",
+        destination: "http://localhost:1337/api/:path*", // Proxy to Backend
       },
     ];
   },
@@ -21,7 +21,6 @@ const nextConfig = {
   publicRuntimeConfig: {
     API_URL: process.env.API_URL,
     URL: process.env.URL,
-    INTERNSHIPS_URL: process.env.INTERNSHIPS_URL,
   },
 };
 
