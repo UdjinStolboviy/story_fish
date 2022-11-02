@@ -1,8 +1,9 @@
 import { Page } from "@/components/Page";
 import type { NextPage, GetStaticProps, GetServerSideProps } from "next";
 import Head from "next/head";
+import { Layout } from "@/components/Layout";
 
-export default function Index() {
+export default function MainPage() {
   return (
     <>
       <Head>
@@ -10,7 +11,9 @@ export default function Index() {
         <meta name="description" content="IT courses for everyone" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Page title="Server render" />
+      <Layout>
+        <Page title="Server render" />
+      </Layout>
     </>
   );
 }

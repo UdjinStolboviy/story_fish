@@ -77,7 +77,7 @@ export const { actions, reducer } = userSlice;
 
 export const selectUser = ({ user }: RootState) => user;
 
-const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+const api_url = process.env.APY_URL || "http://localhost:1337";
 
 const clearUserInfoFromLocalStorage = () => {
   localStorage.removeItem("jwt");

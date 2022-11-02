@@ -17,8 +17,8 @@ import {
   MainNav,
   SearchInput,
   Content,
-  Footer,
 } from "./components";
+import Footer from "@/pages/sections/footer/footer";
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -28,9 +28,10 @@ export const Layout: FC = ({ children }) => {
   const { q } = router.query;
   const [query, setQuery] = useState(q);
 
-  const { username } = useSelector<RootState, RootState["user"]>(selectUser);
+  // const { username } = useSelector<RootState, RootState["user"]>(selectUser);
+  const username = "username";
   const [isDark, setIsDark] = useState(true);
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
   const toggleDark = () => {
     localStorage.setItem("theme", isDark ? "light" : "dark");
@@ -38,7 +39,7 @@ export const Layout: FC = ({ children }) => {
   };
 
   useIsomorphicLayoutEffect(() => {
-    dispatch(login());
+    // dispatch(login());
     const theme = localStorage.getItem("theme");
     const themeExistsInStorage = Boolean(theme !== null);
 
@@ -100,9 +101,7 @@ export const Layout: FC = ({ children }) => {
           onChange={searchChange}
         />
         <Content>{children}</Content>
-        <Footer>
-          © {new Date().getFullYear()} NickOvchinnikov. All rights reserved.
-        </Footer>
+        <Footer />
       </Wrapper>
     </ThemeProvider>
   );

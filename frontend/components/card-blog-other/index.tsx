@@ -4,7 +4,7 @@ import Image from "next/image";
 import { LargeCardStyledBlog, SmallCardStyledBlog } from "./styles-blog-cart";
 
 import moment from "moment";
-import { imageLoader } from "..";
+import { imageLoader } from "../ImageLoader";
 interface IProps {
   size: "large" | "small";
   srcImg: string;

@@ -16,7 +16,7 @@ export class CounterStore {
     root: RootStore;
     size: "BIG" | "SMALL" = "SMALL";
     state: "STOPPED" | "STARTED" | "PAUSED" = "STOPPED";
-    counter: number = 0;
+    counter = 0;
     timer: number | undefined;
 
     constructor(root: RootStore) {
