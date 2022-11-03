@@ -15,7 +15,7 @@ const socialLinks = [
     src: "/images/instagram.svg",
   },
   {
-    link: "https://www.facebook.com/mydigicode",
+    link: "https://www.facebook.com/de",
     src: "/images/facebook.svg",
   },
   {
@@ -26,53 +26,55 @@ const socialLinks = [
 
 const Footer = () => (
   <FooterStyled>
-    <nav>
-      <StyleEmail>
-        <a
-          href="mailto:hello@mydigicode.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          hello@mydigicode.com
-        </a>
-      </StyleEmail>
-      <StyleSocialList>
-        {socialLinks.map((navItem, index) => (
-          <li key={navItem.link + index}>
-            <a href={navItem.link} target="_blank" rel="noopener noreferrer">
-              <Image
-                src={navItem.src}
-                width={28}
-                height={28}
-                loader={imageLoader}
-              ></Image>
+    <div>
+      <nav>
+        <StyleEmail>
+          <a
+            href="mailto:hello@icoe.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            hello@sdgsgs.com
+          </a>
+        </StyleEmail>
+        <StyleSocialList>
+          {socialLinks.map((navItem, index) => (
+            <li key={navItem.link + index}>
+              <a href={navItem.link} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src={navItem.src}
+                  width={28}
+                  height={28}
+                  loader={imageLoader}
+                ></Image>
+              </a>
+            </li>
+          ))}
+        </StyleSocialList>
+      </nav>
+      <div>
+        <p>©udjin 2011 — 2022</p>
+        <ul className="fuuter-privacy">
+          <li>
+            <a
+              href={"https://de.com/privacy-policy/"}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Privacy Policy
             </a>
           </li>
-        ))}
-      </StyleSocialList>
-    </nav>
-    <div>
-      <p>©udjin 2011 — 2022</p>
-      <ul className="fuuter-privacy">
-        <li>
-          <a
-            href={"https://de.com/privacy-policy/"}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Privacy Policy
-          </a>
-        </li>
-        <li>
-          <a
-            href={"https://.com/terms-of-use/"}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Terms of Use
-          </a>
-        </li>
-      </ul>
+          <li>
+            <a
+              href={"https://.com/terms-of-use/"}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Terms of Use
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </FooterStyled>
 );

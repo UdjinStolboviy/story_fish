@@ -2,11 +2,22 @@ import StyleGuide from "@/style-guide";
 import styled from "@emotion/styled";
 
 export const FooterStyled = styled.footer`
-  width: 100%;
-  transform: translateY();
-  padding: 0 96px;
-  border-radius: 100px 100px 0 0;
-  background-color: ${StyleGuide.Colors.Basic.white};
+  grid-area: footer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 4rem;
+
+  & div {
+    width: 100%;
+    transform: translateY();
+    padding: 0 96px;
+    border-radius: 100px 100px 0 0;
+    color: ${({ theme }) => theme.font.regular};
+    background-color: ${({ theme }) => theme.background};
+    display: flex;
+    flex-direction: column;
+  }
   & nav {
     display: flex;
     align-items: center;
@@ -26,6 +37,7 @@ export const FooterStyled = styled.footer`
       }
       & li {
         & a {
+          text-decoration: none;
           color: ${StyleGuide.Colors.Basic.black};
           transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
         }
