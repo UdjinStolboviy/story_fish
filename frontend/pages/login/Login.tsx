@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +17,7 @@ import { Button } from "@/components/Button";
 import { StyledLink } from "@/components/StyledLink";
 import { useUserStore } from "@/providers/RootStoreProvider";
 import { observer } from "mobx-react-lite";
+import { useState } from "react";
 
 const StyledInput = styled(Input)`
   margin-bottom: 1rem;
@@ -38,13 +38,15 @@ const Login: NextPage = () => {
 
   const { username, email, jwt, error } = useUserStore();
 
+  const [dataForm, setDataForm] = useState({} as LoginForm);
+
   if (Boolean(jwt) && !error) {
     router.push("/user");
   }
-
+  useUserStore().login(dataForm);
   const onSubmit = (data: LoginForm) => {
     console.log(data, "data-----------------login");
-    //useUserStore().login(data);
+    setDataForm(data);
   };
 
   return (
@@ -103,4 +105,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default observer(Login);
+export default Login;

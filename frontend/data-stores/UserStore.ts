@@ -17,7 +17,7 @@ export class UserStore {
     jwt = '';
     username = '';
     email = '';
-    error = undefined;
+    error = '';
 
     constructor(root: RootStore) {
         this.root = root;
@@ -77,7 +77,8 @@ export class UserStore {
 
             if (response.status < 200 || response.status >= 300) {
                 clearUserInfoFromLocalStorage();
-                return this.error = data;
+                this.error = 'Invalid login request';
+                return
             }
             const result = (jwt ? { jwt, user: data } : data)
             runInAction(() => {
@@ -85,7 +86,7 @@ export class UserStore {
                 this.jwt = result.jwt;
                 this.username = result?.user?.username;
                 this.email = result?.user?.email;
-                this.error = undefined;
+                this.error = '';
             });
             setupUserInfoToLocalStorage(result);
             return result;
@@ -106,7 +107,7 @@ export class UserStore {
                 this.jwt = "";
                 this.username = "";
                 this.email = "";
-                this.error = undefined;
+                this.error = '';
             });
         } catch (error) {
             runInAction(() => {
@@ -117,8 +118,9 @@ export class UserStore {
     }
 
     registration = async (registrationData: RegistrationData) => {
+        console.log(registrationData, "registrationData ------------", config().baseURL);
         try {
-            console.log(registrationData, "registrationData ------------");
+
             const response = await fetch(`${config().baseURL}/auth/local/register`, {
                 method: "POST",
                 headers: {

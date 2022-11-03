@@ -7,7 +7,7 @@ export const config = () => {
     }
 
     return {
-        baseURL: (window as any)?._env_?.API_URL || publicRuntimeConfig.API_URL || '/api',
+        baseURL: (window as any)?._env_?.API_URL || publicRuntimeConfig.API_URL || 'http://localhost:1337/api',
         URL: (window as any)?._env_?.URL || publicRuntimeConfig.URL || '',
     };
 };
