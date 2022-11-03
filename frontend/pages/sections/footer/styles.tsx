@@ -1,11 +1,15 @@
+import { borderRadius, boxShadow } from "@/components/styles";
 import StyleGuide from "@/style-guide";
 import styled from "@emotion/styled";
 
 export const FooterStyled = styled.footer`
   grid-area: footer;
   padding: 30px 96px 30px 96px;
-  border-radius: 90px 90px 8px 8px;
-  border: 1px solid #000000;
+  border-radius: 90px;
+  border: 0.5px solid ${({ theme }) => theme.components.shadow2};
+  background: ${({ theme }) => theme.background};
+  ${({ theme }) =>
+    boxShadow(theme.components.shadow1, theme.components.shadow2)};
 
   & div {
     width: 100%;

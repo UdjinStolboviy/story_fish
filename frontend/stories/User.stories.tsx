@@ -2,8 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
 import { mockUser } from "@/mocks/user";
-import User from "@/pages/user";
+
 import { rootReducer } from "@/store";
+import User from "@/pages/sections/user";
 
 const store = configureStore({
   reducer: rootReducer,

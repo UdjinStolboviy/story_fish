@@ -8,6 +8,7 @@ import {
     IGetInstagramPosts,
 } from "./types";
 import qs from "qs";
+import { LoginData } from "@/data-stores/TypesApp";
 
 type FetchMethod = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
 
@@ -70,6 +71,30 @@ export class ApiService {
             "GET"
         );
     }
+
+    public createLoginRequest = (
+        jwt: string | null,
+        loginData: LoginData | undefined
+    ) => {
+        if (jwt && !loginData) {
+            return fetch(`${config().baseURL}/users/me`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            });
+        }
+        if (loginData) {
+            return fetch(`${config().baseURL}/auth/local`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(loginData),
+            });
+        }
+        throw { error: "Invalid login request" };
+    };
 
     private async makeRequest<TResponse>(
         url: string,

@@ -5,26 +5,22 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { RootState, AppDispatch } from "@/store";
 import { selectUser, logout } from "@/services/userSlice";
+import { observer } from "mobx-react-lite";
 
 import { CenteredTile } from "@/components/Tile";
 import { Button } from "@/components/Button";
+import { useUserStore } from "@/providers/RootStoreProvider";
 
 const User: NextPage = () => {
   const router = useRouter();
-  const { username, email, error } = useSelector<RootState, RootState["user"]>(
-    selectUser
-  );
-  const dispatch = useDispatch<AppDispatch>();
-
+  const { username, email, error } = useUserStore();
   useEffect(() => {
     if (!username || Boolean(error)) {
-      dispatch(logout());
       router.push("/login");
     }
   }, []);
 
   const logoutHandler = () => {
-    dispatch(logout());
     router.push("/");
   };
 
@@ -37,4 +33,4 @@ const User: NextPage = () => {
   ) : null;
 };
 
-export default User;
+export default observer(User);

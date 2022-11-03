@@ -1,8 +1,7 @@
 import { Provider } from "react-redux";
 
 import { store } from "@/store";
-
-import Registration from "@/pages/registration";
+import Registration from "@/pages/registration/Registration";
 
 export default {
   title: "Pages/Registration",

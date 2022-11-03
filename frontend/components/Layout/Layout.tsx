@@ -2,6 +2,7 @@ import { useState, useLayoutEffect, useEffect, FC, ChangeEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
+import { observer } from "mobx-react-lite";
 import { ThemeProvider } from "@emotion/react";
 
 import { AppDispatch, RootState } from "@/store";
@@ -19,19 +20,18 @@ import {
   Content,
 } from "./components";
 import Footer from "@/pages/sections/footer/footer";
+import { useUserStore } from "@/providers/RootStoreProvider";
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-export const Layout: FC = ({ children }) => {
+export const Layout: FC = observer(({ children }) => {
   const router = useRouter();
   const { q } = router.query;
   const [query, setQuery] = useState(q);
 
-  // const { username } = useSelector<RootState, RootState["user"]>(selectUser);
-  const username = "username";
+  const { username } = useUserStore();
   const [isDark, setIsDark] = useState(true);
-  // const dispatch = useDispatch<AppDispatch>();
 
   const toggleDark = () => {
     localStorage.setItem("theme", isDark ? "light" : "dark");
@@ -39,7 +39,6 @@ export const Layout: FC = ({ children }) => {
   };
 
   useIsomorphicLayoutEffect(() => {
-    // dispatch(login());
     const theme = localStorage.getItem("theme");
     const themeExistsInStorage = Boolean(theme !== null);
 
@@ -105,4 +104,4 @@ export const Layout: FC = ({ children }) => {
       </Wrapper>
     </ThemeProvider>
   );
-};
+});

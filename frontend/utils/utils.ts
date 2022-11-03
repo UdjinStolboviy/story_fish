@@ -1,3 +1,5 @@
+import { UserRegistered } from "@/data-stores/TypesApp";
+
 export function formatDate(t: Date) {
     return `${padNum(t.getUTCHours())}:${padNum(t.getUTCMinutes())}:${padNum(
         t.getUTCSeconds()
@@ -19,3 +21,15 @@ export async function fetchPost(id: any) {
         }, 500)
     );
 }
+
+export const clearUserInfoFromLocalStorage = () => {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
+};
+
+export const setupUserInfoToLocalStorage = (result: UserRegistered) => {
+    localStorage.setItem("jwt", result.jwt);
+    localStorage.setItem("username", result?.user?.username);
+    localStorage.setItem("email", result?.user?.email);
+};

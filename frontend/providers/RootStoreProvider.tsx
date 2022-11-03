@@ -22,6 +22,11 @@ export function useCounterStore() {
   return counterStore;
 }
 
+export function useUserStore() {
+  const { userStore } = useRootStore();
+  return userStore;
+}
+
 export function useSizeSwitcherStore() {
   const { sizeSwitcherStore } = useRootStore();
   return sizeSwitcherStore;
