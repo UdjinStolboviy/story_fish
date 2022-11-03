@@ -7,20 +7,12 @@ import { imageLoader } from "@/components/ImageLoader";
 
 const socialLinks = [
   {
-    link: "https://www.lin.com/company/",
-    src: "/images/linkedin.svg",
-  },
-  {
     link: "https://www.im/",
     src: "/images/instagram.svg",
   },
   {
     link: "https://www.facebook.com/de",
     src: "/images/facebook.svg",
-  },
-  {
-    link: "https://IE582427.11,19.htm",
-    src: "/images/glassdoor.svg",
   },
 ];
 
@@ -52,16 +44,16 @@ const Footer = () => (
           ))}
         </StyleSocialList>
       </nav>
-      <div>
+      <div className="footer-wrapper-privacy ">
         <p>©udjin 2011 — 2022</p>
-        <ul className="fuuter-privacy">
+        <ul className="footer-privacy">
           <li>
             <a
               href={"https://de.com/privacy-policy/"}
               target="_blank"
               rel="noreferrer"
             >
-              Privacy Policy
+              Адресса и контакти
             </a>
           </li>
           <li>
@@ -70,7 +62,7 @@ const Footer = () => (
               target="_blank"
               rel="noreferrer"
             >
-              Terms of Use
+              Більше про нас
             </a>
           </li>
         </ul>

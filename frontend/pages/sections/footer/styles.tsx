@@ -3,16 +3,13 @@ import styled from "@emotion/styled";
 
 export const FooterStyled = styled.footer`
   grid-area: footer;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 4rem;
+  padding: 30px 96px 30px 96px;
+  border-radius: 90px 90px 8px 8px;
+  border: 1px solid #000000;
 
   & div {
     width: 100%;
     transform: translateY();
-    padding: 0 96px;
-    border-radius: 100px 100px 0 0;
     color: ${({ theme }) => theme.font.regular};
     background-color: ${({ theme }) => theme.background};
     display: flex;
@@ -22,22 +19,26 @@ export const FooterStyled = styled.footer`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    border-bottom: 1px solid #000000;
   }
-  & div {
-    padding-top: 32px;
+  & .footer-wrapper-privacy {
+    padding-top: 30px;
     padding-bottom: 32px;
     margin: 0 auto;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    & .footer-privacy li {
+      margin-left: 30px;
+    }
     & ul {
       display: flex;
-      margin-left: auto;
+      justify-content: flex-end;
+
       & li:last-of-type {
-        margin-left: 50px;
       }
       & li {
         & a {
-          text-decoration: none;
           color: ${StyleGuide.Colors.Basic.black};
           transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
         }
@@ -74,7 +75,6 @@ export const FooterStyled = styled.footer`
 export const StyleSocialList = styled.ul`
   margin: 0 auto;
   z-index: 4;
-  max-width: 1240px;
   display: flex;
   width: 60%;
   justify-content: flex-end;
@@ -85,6 +85,7 @@ export const StyleSocialList = styled.ul`
   & li:last-of-type {
     margin-right: 0;
   }
+
   @media screen and (min-width: 740px) and (max-width: 1200px) {
     margin: 0 auto;
     z-index: 4;
@@ -131,9 +132,7 @@ export const StyleSocialList = styled.ul`
   }
 `;
 export const StyleEmail = styled.div`
-  width: 50%;
   height: 100%;
-  align-items: center;
 
   & a {
     font-size: ${StyleGuide.FontStyles.title.h5.fontSize};
