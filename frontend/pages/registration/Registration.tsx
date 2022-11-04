@@ -120,4 +120,4 @@ const Registration: NextPage = () => {
   );
 };
 
-export default Registration;
+export default observer(Registration);

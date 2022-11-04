@@ -17,7 +17,9 @@ import { Button } from "@/components/Button";
 import { StyledLink } from "@/components/StyledLink";
 import { useUserStore } from "@/providers/RootStoreProvider";
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { ApiService } from "@/services/api";
+import { UserState } from "@/data-stores/TypesApp";
 
 const StyledInput = styled(Input)`
   margin-bottom: 1rem;
@@ -29,6 +31,7 @@ export type LoginForm = {
 };
 
 const Login: NextPage = () => {
+  const apiService = new ApiService();
   const {
     register,
     handleSubmit,
@@ -36,16 +39,28 @@ const Login: NextPage = () => {
   } = useForm<LoginForm>();
   const router = useRouter();
 
-  const { username, email, jwt, error } = useUserStore();
+  const { username, email, jwt, error, requestState } = useUserStore();
 
   const [dataForm, setDataForm] = useState({} as LoginForm);
+  const [dataUser, setDataUser] = useState(null);
 
-  if (Boolean(jwt) && !error) {
+  if (dataUser) {
+    console.log("dataUser", dataUser.user);
+    useUserStore().setUser(dataUser.user);
+  }
+
+  if (jwt) {
     router.push("/user");
   }
-  useUserStore().login(dataForm);
+  useEffect(() => {
+    if (!jwt) {
+      apiService.login(dataForm).then((data) => {
+        setDataUser(data);
+      });
+    }
+  }, [dataForm]);
+
   const onSubmit = (data: LoginForm) => {
-    console.log(data, "data-----------------login");
     setDataForm(data);
   };
 
@@ -105,4 +120,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default observer(Login);

@@ -25,7 +25,7 @@ import { useUserStore } from "@/providers/RootStoreProvider";
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-export const Layout: FC = observer(({ children }) => {
+export const Layout: FC = ({ children }) => {
   const router = useRouter();
   const { q } = router.query;
   const [query, setQuery] = useState(q);
@@ -104,4 +104,4 @@ export const Layout: FC = observer(({ children }) => {
       </Wrapper>
     </ThemeProvider>
   );
-});
+};

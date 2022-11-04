@@ -26,14 +26,13 @@ export class UserStore {
             jwt: observable,
             username: observable,
             email: observable,
-            error: observable,
         });
     }
 
     setUser(user: UserState) {
         this.jwt = user.jwt;
-        this.username = user.username;
-        this.email = user.email;
+        this.username = user.user.username;
+        this.email = user.user.email;
     }
 
     getUser() {
@@ -48,6 +47,7 @@ export class UserStore {
         jwt: string | null,
         loginData: LoginData | undefined
     ) => {
+
         if (jwt && !loginData) {
             return fetch(`${config().baseURL}/users/me`, {
                 method: "GET",
@@ -65,56 +65,19 @@ export class UserStore {
                 body: JSON.stringify(loginData),
             });
         }
+
         throw { error: "Invalid login request" };
     };
 
-    login = async (loginData: LoginData) => {
+
+
+    logout = () => {
         this.requestState = "pending";
-        try {
-            const jwt = localStorage.getItem("jwt");
-            const response = await this.createLoginRequest(jwt, loginData);
-            const data = await response.json();
-
-            if (response.status < 200 || response.status >= 300) {
-                clearUserInfoFromLocalStorage();
-                this.error = 'Invalid login request';
-                return
-            }
-            const result = (jwt ? { jwt, user: data } : data)
-            runInAction(() => {
-                this.requestState = "fulfilled";
-                this.jwt = result.jwt;
-                this.username = result?.user?.username;
-                this.email = result?.user?.email;
-                this.error = '';
-            });
-            setupUserInfoToLocalStorage(result);
-            return result;
-        } catch (error) {
-            runInAction(() => {
-                clearUserInfoFromLocalStorage();
-                this.requestState = "rejected";
-            });
-        }
-    }
-
-    logout = async () => {
-        this.requestState = "pending";
-        try {
-            clearUserInfoFromLocalStorage()
-            runInAction(() => {
-                this.requestState = "fulfilled";
-                this.jwt = "";
-                this.username = "";
-                this.email = "";
-                this.error = '';
-            });
-        } catch (error) {
-            runInAction(() => {
-                this.requestState = "rejected";
-
-            });
-        }
+        this.requestState = "fulfilled";
+        this.jwt = "";
+        this.username = "";
+        this.email = "";
+        this.error = '';
     }
 
     registration = async (registrationData: RegistrationData) => {
@@ -134,15 +97,12 @@ export class UserStore {
             if (response.status < 200 || response.status >= 300) {
                 return this.requestState = "rejected";
             }
-
             setupUserInfoToLocalStorage(result);
-
             return result;
         } catch (error) {
-            return runInAction(() => {
-                this.requestState = "rejected";
 
-            });
+            return this.requestState = "rejected";
+
         }
     }
 

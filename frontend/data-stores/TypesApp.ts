@@ -25,3 +25,8 @@ export type RegistrationData = {
     email: string;
     password: string;
 };
+
+export type UserRegistered = {
+    jwt: string;
+    user: RegistrationData
+};

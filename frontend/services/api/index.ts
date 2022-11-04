@@ -9,6 +9,7 @@ import {
 } from "./types";
 import qs from "qs";
 import { LoginData } from "@/data-stores/TypesApp";
+import { clearUserInfoFromLocalStorage, setupUserInfoToLocalStorage } from "@/utils/utils";
 
 type FetchMethod = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
 
@@ -95,6 +96,25 @@ export class ApiService {
         }
         throw { error: "Invalid login request" };
     };
+
+    public login = async (loginData: LoginData) => {
+
+        try {
+            const jwt = localStorage.getItem("jwt");
+            const response = await this.createLoginRequest(jwt, loginData);
+            const data = await response.json();
+            if (response.status < 200 || response.status >= 300) {
+                console.log('Invalid login request');
+                return
+            }
+            const result = (jwt ? { jwt, user: data } : data)
+            setupUserInfoToLocalStorage(result);
+            return result;
+        } catch (error) {
+            clearUserInfoFromLocalStorage();
+            console.log("error login", error);
+        }
+    }
 
     private async makeRequest<TResponse>(
         url: string,

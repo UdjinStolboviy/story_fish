@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { RootState, AppDispatch } from "@/store";
-import { selectUser, logout } from "@/services/userSlice";
+import { selectUser, logout, UserState } from "@/services/userSlice";
 
 import { CenteredTile } from "@/components/Tile";
 import { Button } from "@/components/Button";
@@ -14,17 +14,29 @@ import { Layout } from "@/components/Layout";
 import { observer } from "mobx-react-lite";
 import { useUserStore } from "@/providers/RootStoreProvider";
 import { useState } from "react";
+import { clearUserInfoFromLocalStorage } from "@/utils/utils";
 
 const User: NextPage = () => {
   const router = useRouter();
-  const { username, email, error } = useUserStore();
+  const { username, email, error, jwt } = useUserStore();
+  const [user, setUser] = useState({} as UserState);
+  console.log("user", user);
   useEffect(() => {
-    if (!username || Boolean(error)) {
+    if (!jwt) {
       router.push("/login");
+    } else {
+      const user: UserState = {
+        jwt: localStorage.getItem("jwt") || "",
+        username: localStorage.getItem("username") || "",
+        email: localStorage.getItem("email") || "",
+      };
+      setUser(user);
     }
   }, []);
 
   const logoutHandler = () => {
+    useUserStore().logout();
+    clearUserInfoFromLocalStorage();
     router.push("/");
   };
 
