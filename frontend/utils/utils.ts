@@ -23,13 +23,21 @@ export async function fetchPost(id: any) {
 }
 
 export const clearUserInfoFromLocalStorage = () => {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("username");
-    localStorage.removeItem("email");
+    localStorage.removeItem("user");
 };
 
 export const setupUserInfoToLocalStorage = (result: UserRegistered) => {
-    localStorage.setItem("jwt", result.jwt);
-    localStorage.setItem("username", result?.user?.username);
-    localStorage.setItem("email", result?.user?.email);
+    const data = JSON.stringify(result);
+    localStorage.setItem("user", data);
 };
+
+export const getUserInfoFromLocalStorage = () => {
+    if (typeof window === "undefined") {
+        return null;
+    }
+    const data = localStorage.getItem("user") || null;
+    if (data) {
+        return JSON.parse(data);
+    }
+    return null;
+}

@@ -19,15 +19,15 @@ import { StyledLink } from "@/components/StyledLink";
 import Head from "next/head";
 import { Layout } from "@/components/Layout";
 import { observer } from "mobx-react-lite";
-import { useUserStore } from "@/providers/RootStoreProvider";
+
 import { useState } from "react";
+import { getUserInfoFromLocalStorage } from "@/utils/utils";
 
 const StyledInput = styled(Input)`
   margin-bottom: 1rem;
 `;
 
 const Registration: NextPage = () => {
-  const { username, email, jwt, error } = useUserStore();
   const [dataForm, setDataForm] = useState({} as RegistrationData);
   const {
     register,
@@ -35,12 +35,11 @@ const Registration: NextPage = () => {
     formState: { errors },
   } = useForm<RegistrationData>();
   const router = useRouter();
-
-  if (Boolean(jwt) && !error) {
+  const user = getUserInfoFromLocalStorage();
+  if (Boolean(user) && !errors) {
     router.push("/user");
   }
-  console.log(username, "username");
-  useUserStore().registration(dataForm);
+
   const onSubmit = (data: RegistrationData) => {
     setDataForm(data);
   };
@@ -56,7 +55,7 @@ const Registration: NextPage = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <CenteredTile header="Create an account">
             <h3>
-              <ConditionalFeedback>{error}</ConditionalFeedback>
+              <ConditionalFeedback>{errors}</ConditionalFeedback>
             </h3>
             <StyledInput
               label="username"

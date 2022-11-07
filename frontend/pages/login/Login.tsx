@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 import { RootState, AppDispatch } from "@/store";
 import { selectUser, login } from "@/services/userSlice";
-import { Page } from "@/components/Page";
+
 import type { NextPage, GetStaticProps, GetServerSideProps } from "next";
 import Head from "next/head";
 import { Layout } from "@/components/Layout";
@@ -15,11 +15,23 @@ import { CenteredTile } from "@/components/Tile";
 import { Input, ConditionalFeedback } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { StyledLink } from "@/components/StyledLink";
-import { useUserStore } from "@/providers/RootStoreProvider";
+
 import { observer } from "mobx-react-lite";
 import { useCallback, useEffect, useState } from "react";
 import { ApiService } from "@/services/api";
-import { UserState } from "@/data-stores/TypesApp";
+import { UserDate, UserState } from "@/data-stores/TypesApp";
+
+import {
+  dehydrate,
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "react-query";
+import {
+  getUserInfoFromLocalStorage,
+  setupUserInfoToLocalStorage,
+} from "@/utils/utils";
 
 const StyledInput = styled(Input)`
   margin-bottom: 1rem;
@@ -31,32 +43,27 @@ export type LoginForm = {
 };
 
 const Login: NextPage = () => {
-  const apiService = new ApiService();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>();
   const router = useRouter();
+  const apiService = new ApiService();
+  const queryClient = useQueryClient();
 
-  const { username, email, jwt, error, requestState } = useUserStore();
+  const [dataForm, setDataForm] = useState<LoginForm | null>(null);
 
-  const [dataForm, setDataForm] = useState({} as LoginForm);
-  const [dataUser, setDataUser] = useState(null);
-
-  if (dataUser) {
-    console.log("dataUser", dataUser.user);
-    useUserStore().setUser(dataUser.user);
-  }
-
-  if (jwt) {
-    router.push("/user");
-  }
   useEffect(() => {
-    if (!jwt) {
+    const user = getUserInfoFromLocalStorage();
+    if (!user && dataForm) {
       apiService.login(dataForm).then((data) => {
-        setDataUser(data);
+        console.log("data-------------", data);
+        setupUserInfoToLocalStorage(data);
+        queryClient.setQueryData("user", data);
       });
+    } else if (user) {
+      router.push("/user");
     }
   }, [dataForm]);
 
@@ -75,7 +82,7 @@ const Login: NextPage = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <CenteredTile header="Login">
             <h3>
-              <ConditionalFeedback>{error}</ConditionalFeedback>
+              <ConditionalFeedback>{errors.password}</ConditionalFeedback>
             </h3>
             <StyledInput
               label="Identifier"

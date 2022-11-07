@@ -20,7 +20,8 @@ import {
   Content,
 } from "./components";
 import Footer from "@/pages/sections/footer/footer";
-import { useUserStore } from "@/providers/RootStoreProvider";
+
+import { useQueryClient } from "react-query";
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -29,8 +30,8 @@ export const Layout: FC = ({ children }) => {
   const router = useRouter();
   const { q } = router.query;
   const [query, setQuery] = useState(q);
-
-  const { username } = useUserStore();
+  const queryClient = useQueryClient();
+  const user = queryClient.getQueryData("user");
   const [isDark, setIsDark] = useState(true);
 
   const toggleDark = () => {
@@ -84,8 +85,8 @@ export const Layout: FC = ({ children }) => {
           </LogoLink>
         </Link>
         <MainNav>
-          <Link href={username ? "/user" : "/login"} passHref>
-            <IconButton name={username ? "User" : "Login"} size={1} />
+          <Link href={user ? "/user" : "/login"} passHref>
+            <IconButton name={user ? "User" : "Login"} size={1} />
           </Link>
           <IconButton
             name={!isDark ? "Moon" : "Sun"}

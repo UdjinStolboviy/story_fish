@@ -11,31 +11,27 @@ import { Button } from "@/components/Button";
 
 import Head from "next/head";
 import { Layout } from "@/components/Layout";
-import { observer } from "mobx-react-lite";
-import { useUserStore } from "@/providers/RootStoreProvider";
+
 import { useState } from "react";
 import { clearUserInfoFromLocalStorage } from "@/utils/utils";
+import { useQueryClient } from "react-query";
 
 const User: NextPage = () => {
   const router = useRouter();
-  const { username, email, error, jwt } = useUserStore();
-  const [user, setUser] = useState({} as UserState);
-  console.log("user", user);
+  const [user, setUser] = useState<UserState | null>(null);
+  const queryClient = useQueryClient();
+  console.log("user ----------------  s ", user);
   useEffect(() => {
-    if (!jwt) {
+    const user: UserState | undefined = queryClient.getQueryData("user");
+
+    if (!user) {
       router.push("/login");
     } else {
-      const user: UserState = {
-        jwt: localStorage.getItem("jwt") || "",
-        username: localStorage.getItem("username") || "",
-        email: localStorage.getItem("email") || "",
-      };
       setUser(user);
     }
   }, []);
 
   const logoutHandler = () => {
-    useUserStore().logout();
     clearUserInfoFromLocalStorage();
     router.push("/");
   };
@@ -48,10 +44,10 @@ const User: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        {username && email ? (
+        {user && user.username && user.email ? (
           <CenteredTile header="Profile">
-            <h3>username: {username}</h3>
-            <h3>email: {email}</h3>
+            <h3>username: {user.username}</h3>
+            <h3>email: {user.email}</h3>
             <Button onClick={logoutHandler}>Logout</Button>
           </CenteredTile>
         ) : null}

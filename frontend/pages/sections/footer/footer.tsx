@@ -35,6 +35,7 @@ const Footer = () => (
               <a href={navItem.link} target="_blank" rel="noopener noreferrer">
                 <Image
                   src={navItem.src}
+                  unoptimized={true}
                   width={28}
                   height={28}
                   loader={imageLoader}

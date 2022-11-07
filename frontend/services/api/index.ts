@@ -8,7 +8,7 @@ import {
     IGetInstagramPosts,
 } from "./types";
 import qs from "qs";
-import { LoginData } from "@/data-stores/TypesApp";
+import { LoginData, RegistrationData } from "@/data-stores/TypesApp";
 import { clearUserInfoFromLocalStorage, setupUserInfoToLocalStorage } from "@/utils/utils";
 
 type FetchMethod = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
@@ -107,7 +107,7 @@ export class ApiService {
                 console.log('Invalid login request');
                 return
             }
-            const result = (jwt ? { jwt, user: data } : data)
+            const result = data
             setupUserInfoToLocalStorage(result);
             return result;
         } catch (error) {
@@ -152,5 +152,34 @@ export class ApiService {
         } else {
             throw await response.json();
         }
+    }
+
+    public registration = async (registrationData: RegistrationData) => {
+        try {
+            const response = await fetch(`${config().baseURL}/auth/local/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(registrationData),
+            });
+
+            const result = await response.json();
+
+            if (response.status < 200 || response.status >= 300) {
+                return console.log(response.statusText, "rejected-registration");
+            }
+            setupUserInfoToLocalStorage(result);
+            return result;
+        } catch (error) {
+            return console.log(error, "rejected-registration");
+        }
+    }
+
+
+
+    logout = () => {
+
+        return clearUserInfoFromLocalStorage();
     }
 }

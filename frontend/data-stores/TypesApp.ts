@@ -15,6 +15,22 @@ export type UserState = {
     error?: SerializedError;
 };
 
+export type UserDate = {
+    jwt: string;
+    user: {
+        jwt: string;
+        user: {
+            id: number;
+            username: string;
+            email: string;
+            provider: string;
+            confirmed: boolean;
+            blocked: boolean;
+        }
+    };
+
+};
+
 export type LoginData = {
     identifier: string;
     password: string;
