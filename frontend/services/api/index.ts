@@ -111,7 +111,6 @@ export class ApiService {
             setupUserInfoToLocalStorage(result);
             return result;
         } catch (error) {
-            clearUserInfoFromLocalStorage();
             console.log("error login", error);
         }
     }

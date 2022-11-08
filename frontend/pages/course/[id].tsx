@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";

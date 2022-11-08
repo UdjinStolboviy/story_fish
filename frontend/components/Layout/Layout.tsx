@@ -22,6 +22,7 @@ import {
 import Footer from "@/pages/sections/footer/footer";
 
 import { useQueryClient } from "react-query";
+import { getUserInfoFromLocalStorage } from "@/utils/utils";
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -31,7 +32,7 @@ export const Layout: FC = ({ children }) => {
   const { q } = router.query;
   const [query, setQuery] = useState(q);
   const queryClient = useQueryClient();
-  const user = queryClient.getQueryData("user");
+  const user = getUserInfoFromLocalStorage();
   const [isDark, setIsDark] = useState(true);
 
   const toggleDark = () => {

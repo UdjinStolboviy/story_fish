@@ -28,6 +28,7 @@ export type RegistrationData = {
   password: string;
 };
 
+export type UserData = { jwt: string; user: { username: string; email: string } } | undefined;
 type UserPayload = { jwt: string; user: { username: string; email: string } };
 
 export const initialState: UserState = {

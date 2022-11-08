@@ -40,10 +40,13 @@ export type Props = {
 } & Omit<IconProps, "ref">;
 
 export const IconButton: FC<Props> = forwardRef(
+  // eslint-disable-next-line react/prop-types
   ({ onClick, ...props }, ref) => (
     <Button
       onClick={onClick}
+      // eslint-disable-next-line react/prop-types
       size={`${(props.size || 2) * 2}rem`}
+      // eslint-disable-next-line react/prop-types
       title={props.name}
       ref={ref as ForwardedRef<HTMLButtonElement>}
     >

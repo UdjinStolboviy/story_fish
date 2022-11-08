@@ -51,18 +51,24 @@ const Login: NextPage = () => {
   const router = useRouter();
   const apiService = new ApiService();
   const queryClient = useQueryClient();
-
+  const user = getUserInfoFromLocalStorage();
   const [dataForm, setDataForm] = useState<LoginForm | null>(null);
 
+  // if (user) {
+  //   router.push("/user");
+  // }
+
+  console.log(user, "user------------");
+
   useEffect(() => {
-    const user = getUserInfoFromLocalStorage();
-    if (!user && dataForm) {
+    if (dataForm && !user) {
       apiService.login(dataForm).then((data) => {
-        console.log("data-------------", data);
         setupUserInfoToLocalStorage(data);
         queryClient.setQueryData("user", data);
+        router.push("/user");
       });
-    } else if (user) {
+    }
+    if (user) {
       router.push("/user");
     }
   }, [dataForm]);

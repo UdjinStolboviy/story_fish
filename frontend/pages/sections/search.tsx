@@ -96,7 +96,9 @@ const headerRender = (q: string, courses?: CourseType[], error?: string) => {
 const strapi_url = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 const Search: NextPage<{ courses: CourseType[]; error?: string }> = ({
+  // eslint-disable-next-line react/prop-types
   courses: ssrCourses,
+  // eslint-disable-next-line react/prop-types
   error: ssrError,
 }) => {
   const router = useRouter();

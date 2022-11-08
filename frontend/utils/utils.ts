@@ -26,9 +26,15 @@ export const clearUserInfoFromLocalStorage = () => {
     localStorage.removeItem("user");
 };
 
-export const setupUserInfoToLocalStorage = (result: UserRegistered) => {
-    const data = JSON.stringify(result);
-    localStorage.setItem("user", data);
+export const setupUserInfoToLocalStorage = (result: UserRegistered | undefined) => {
+    if (typeof window === "undefined") {
+        return null;
+    }
+    if (result) {
+        const data = JSON.stringify(result);
+        localStorage.setItem("user", data);
+    }
+
 };
 
 export const getUserInfoFromLocalStorage = () => {
@@ -36,7 +42,7 @@ export const getUserInfoFromLocalStorage = () => {
         return null;
     }
     const data = localStorage.getItem("user") || null;
-    if (data) {
+    if (data && data !== "undefined") {
         return JSON.parse(data);
     }
     return null;

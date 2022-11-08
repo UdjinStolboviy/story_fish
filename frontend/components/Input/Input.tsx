@@ -110,6 +110,7 @@ export type Props = {
 export const Input: FC<Props & InputHTMLAttributes<HTMLInputElement>> =
   forwardRef(
     (
+      // eslint-disable-next-line react/prop-types
       { label, height = 7, width = 20, icon, feedback, className, ...rest },
       ref
     ) => (

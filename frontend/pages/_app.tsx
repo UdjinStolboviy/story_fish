@@ -12,8 +12,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 300000,
-            cacheTime: 300000000,
+            //staleTime: 300000,
+            cacheTime: 20000000000,
           },
         },
       })
