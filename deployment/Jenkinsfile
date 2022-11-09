@@ -15,7 +15,7 @@ pipeline {
                     withFolderProperties {
                         withKubeConfig([credentialsId: env.K8S_CRED_ID, namespace: env.K8S_NAMESPACE, serverUrl: env.K8S_API_URL]) {
                             dir("deployment/helm") {
-                                sh "helm upgrade --install --namespace ${env.K8S_NAMESPACE} digicode-careers-${env.ENV_NAME} . --values ./${env.ENV_NAME}.yaml"
+                                sh "helm upgrade --install --namespace ${env.K8S_NAMESPACE} dssfsfig-fsdfsfcs-${env.ENV_NAME} . --values ./${env.ENV_NAME}.yaml"
                             }
                         }
                     }

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: digicode-careers-develop-uploads
+  name: fsfsfrs-develop-uploads
   namespace: careers
 spec:
   accessModes:
