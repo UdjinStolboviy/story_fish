@@ -54,12 +54,6 @@ const Login: NextPage = () => {
   const user = getUserInfoFromLocalStorage();
   const [dataForm, setDataForm] = useState<LoginForm | null>(null);
 
-  // if (user) {
-  //   router.push("/user");
-  // }
-
-  console.log(user, "user------------");
-
   useEffect(() => {
     if (dataForm && !user) {
       apiService.login(dataForm).then((data) => {

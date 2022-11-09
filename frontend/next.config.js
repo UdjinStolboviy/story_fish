@@ -4,9 +4,12 @@ const nextConfig = {
   publicRuntimeConfig: {
     URL: process.env.URL,
   },
+  // images: {
+  //   loader: "imgix",
+  //   path: "",
+  // },
   images: {
-    loader: "imgix",
-    path: "",
+    domains: ["localhost:1337", "localhost"],
   },
   async rewrites() {
     return [

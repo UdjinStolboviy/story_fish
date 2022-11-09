@@ -49,6 +49,8 @@ npm test -- -u  (коли падають тести треба обновити 
 npm run build
 npm run build-storybook
 
+npx npm-check-updates
+
 
 docker run -d -p 1337:1337 story-fish:latest
 
